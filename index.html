@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexa AI  Apresentação Institucional 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────────────────────
+       NEXA AI PRESENTATION
+       Design System: Bricolage Grotesque + Inter
+       Palette: #07070f · #9333ea · white
+    ───────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #07070f;
+      --purple:     #9333ea;
+      --purple-l:   #a855f7;
+      --purple-d:   #7c3aed;
+      --purple-deep:#6b21a8;
+      --grad:       linear-gradient(135deg, #6B21A8, #9333EA, #A855F7, #7C3AED);
+      --grad-r:     linear-gradient(135deg, #7C3AED, #A855F7, #C084FC, #8B5CF6);
+      --text:       #f0f0ff;
+      --muted:      rgba(240,240,255,.56);
+      --faint:      rgba(240,240,255,.28);
+      --card:       rgba(255,255,255,.04);
+      --card-b:     rgba(147,51,234,.2);
+      --card-bh:    rgba(147,51,234,.5);
+      --fn-d:       'Bricolage Grotesque', sans-serif;
+      --fn-b:       'Inter', sans-serif;
+      --r:          20px;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fn-b);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── CANVAS ── */
+    #particles {
+      position: fixed; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── DOT GRID ── */
+    #dot-grid {
+      position: fixed; inset: 0;
+      background-image: radial-gradient(rgba(147,51,234,.11) 1px, transparent 1px);
+      background-size: 32px 32px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── PRESENTATION WRAPPER ── */
+    .pres {
+      position: relative;
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* ── SLIDES ── */
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 20px 56px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(18px);
+      filter: blur(5px);
+      transition:
+        opacity .6s cubic-bezier(.25,.46,.45,.94),
+        transform .6s cubic-bezier(.25,.46,.45,.94),
+        filter .6s ease;
+      z-index: 2;
+    }
+    .slide.active  { opacity:1; pointer-events:all; transform:translateY(0); filter:blur(0); }
+    .slide.leaving { opacity:0; transform:translateY(-18px); filter:blur(5px); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(28px);filter:blur(9px)} to{opacity:1;transform:translateY(0);filter:blur(0)} }
+    @keyframes fadeLeft { from{opacity:0;transform:translateX(-30px);filter:blur(7px)} to{opacity:1;transform:translateX(0);filter:blur(0)} }
+    @keyframes fadeRight{ from{opacity:0;transform:translateX(30px);filter:blur(7px)} to{opacity:1;transform:translateX(0);filter:blur(0)} }
+    @keyframes scaleIn  { from{opacity:0;transform:scale(.86);filter:blur(9px)} to{opacity:1;transform:scale(1);filter:blur(0)} }
+    @keyframes shimmer  { 0%{background-position:-200% center} 100%{background-position:200% center} }
+    @keyframes pulsering{ 0%{transform:scale(1);opacity:.8} 100%{transform:scale(2.6);opacity:0} }
+    @keyframes floatY   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    @keyframes countUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes gradShift{ 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+    .au { opacity:0; } .al { opacity:0; } .ar { opacity:0; } .as { opacity:0; }
+    .slide.active .au { animation: fadeUp    .72s cubic-bezier(.25,.46,.45,.94) both; }
+    .slide.active .al { animation: fadeLeft  .72s cubic-bezier(.25,.46,.45,.94) both; }
+    .slide.active .ar { animation: fadeRight .72s cubic-bezier(.25,.46,.45,.94) both; }
+    .slide.active .as { animation: scaleIn   .72s cubic-bezier(.25,.46,.45,.94) both; }
+    .d0{animation-delay:0s!important} .d1{animation-delay:.1s!important} .d2{animation-delay:.2s!important}
+    .d3{animation-delay:.3s!important} .d4{animation-delay:.4s!important} .d5{animation-delay:.5s!important}
+    .d6{animation-delay:.6s!important} .d7{animation-delay:.7s!important} .d8{animation-delay:.8s!important}
+    .d9{animation-delay:.9s!important} .d10{animation-delay:1s!important}
+
+    /* ── REUSABLE ATOMS ── */
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-anim {
+      background: linear-gradient(270deg,#6B21A8,#9333EA,#a855f7,#7c3aed,#c084fc,#9333EA);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 5s ease-in-out infinite;
+    }
+
+    .label {
+      font-family: var(--fn-b); font-size: 13px; font-weight: 700;
+      letter-spacing: .4em; text-transform: uppercase; color: var(--purple-l);
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 18px; border-radius: 100px;
+      background: rgba(147,51,234,.1); border: 1px solid rgba(147,51,234,.25);
+      font-family: var(--fn-b); font-size: 13px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--purple-l);
+    }
+    .badge-dot { width:7px; height:7px; border-radius:50%; background:var(--purple-l); }
+
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 18px; border-radius: 100px;
+      background: rgba(147,51,234,.08); border: 1px solid rgba(147,51,234,.2);
+      font-size: 13px; font-weight: 600; letter-spacing:.12em; text-transform:uppercase;
+      color: var(--purple-l);
+    }
+    .live-ring { position:relative; width:8px; height:8px; flex-shrink:0; }
+    .live-ring::after  { content:''; position:absolute; inset:0; border-radius:50%; background:var(--purple-l); }
+    .live-ring::before { content:''; position:absolute; inset:0; border-radius:50%; background:rgba(147,51,234,.5); animation:pulsering 1.6s ease-out infinite; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--card-b);
+      border-radius: var(--r); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      transition: all .35s cubic-bezier(.25,.46,.45,.94);
+    }
+    .card:hover { border-color:var(--card-bh); box-shadow:0 0 50px rgba(147,51,234,.16), 0 0 0 1px rgba(147,51,234,.1); transform:translateY(-5px); }
+
+    .card-glow { box-shadow: 0 0 50px rgba(147,51,234,.2), 0 0 0 1px rgba(147,51,234,.15); }
+
+    /* gradient top-line card */
+    .card-top {
+      position: relative;
+      background: var(--card); border: 1px solid var(--card-b); border-radius: var(--r);
+      transition: all .35s ease;
+      overflow: hidden;
+    }
+    .card-top::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: var(--grad);
+    }
+    .card-top:hover { border-color:var(--card-bh); box-shadow:0 0 40px rgba(147,51,234,.15); transform:translateY(-5px); }
+
+    .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(147,51,234,.3),transparent); }
+
+    /* ── LOGO ── */
+    .logo { display:inline-flex; align-items:center; gap:10px; }
+    .logo-icon {
+      width:40px; height:40px; border-radius:13px;
+      background: var(--grad); display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 4px 20px rgba(147,51,234,.5); flex-shrink:0;
+    }
+    .logo-name { font-family:var(--fn-d); font-size:21px; font-weight:700; color:var(--text); letter-spacing:-.01em; }
+
+    /* ── PROGRESS + NAV ── */
+    .progress {
+      position: fixed; bottom:0; left:0; height:2px;
+      background: var(--grad);
+      z-index:300;
+      transition: width .42s cubic-bezier(.25,.46,.45,.94);
+      box-shadow: 0 0 14px rgba(147,51,234,.7);
+    }
+    .nav {
+      position: fixed; bottom:22px; left:50%; transform:translateX(-50%);
+      display:flex; align-items:center; gap:8px; z-index:300;
+    }
+    .nav-btn {
+      width:38px; height:38px; border-radius:50%;
+      background:rgba(255,255,255,.04); border:1px solid rgba(147,51,234,.2);
+      color:var(--muted); font-size:16px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:all .25s ease; user-select:none; flex-shrink:0;
+    }
+    .nav-btn:hover { background:rgba(147,51,234,.15); border-color:rgba(147,51,234,.45); color:var(--text); }
+    .nav-count {
+      font-family:var(--fn-b); font-size:12px; color:var(--faint); letter-spacing:.1em; min-width:44px; text-align:center;
+    }
+    .nav-count b { color:var(--purple-l); font-weight:600; }
+
+    .fs-btn {
+      position:fixed; top:20px; right:20px; width:36px; height:36px; border-radius:10px;
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+      color:var(--faint); cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:all .25s ease; z-index:300; font-size:16px;
+    }
+    .fs-btn:hover { background:rgba(147,51,234,.15); border-color:rgba(147,51,234,.3); color:var(--muted); }
+
+    /* ────────────────────────────────
+       SLIDE 1 — CAPA
+    ──────────────────────────────── */
+    #s1 { text-align:center; padding:0; }
+
+    #s1 .hero-glow {
+      position:absolute; width:800px; height:600px; border-radius:50%;
+      background:radial-gradient(ellipse, rgba(147,51,234,.22) 0%, rgba(107,33,168,.1) 45%, transparent 70%);
+      filter:blur(70px); top:-120px; left:50%; transform:translateX(-50%);
+      z-index:0; pointer-events:none;
+    }
+    #s1 .hero-glow-2 {
+      position:absolute; width:500px; height:400px; border-radius:50%;
+      background:radial-gradient(ellipse, rgba(147,51,234,.12) 0%, transparent 70%);
+      filter:blur(60px); bottom:-100px; left:50%; transform:translateX(-50%);
+      z-index:0; pointer-events:none;
+    }
+    #s1 > * { position:relative; z-index:1; }
+
+    .hero-h1 {
+      font-family: var(--fn-d);
+      font-size: clamp(72px, 9.5vw, 130px);
+      font-weight: 800; line-height: .92;
+      letter-spacing: -.03em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-family: var(--fn-b); font-size: clamp(15px,1.4vw,18px);
+      color: var(--muted); max-width: 480px; margin:0 auto 40px; line-height:1.6;
+      font-weight:300;
+    }
+
+    .hero-footer {
+      display:flex; align-items:center; gap:24px; justify-content:center;
+      margin-top:48px;
+    }
+    .hero-stat { text-align:center; }
+    .hero-stat-val { font-family:var(--fn-d); font-size:32px; font-weight:800; display:block; }
+    .hero-stat-lbl { font-size:13px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); }
+    .hero-stat-sep { width:1px; height:44px; background:rgba(147,51,234,.2); }
+
+    .hint { font-size:13px; color:var(--faint); letter-spacing:.12em; text-transform:uppercase; margin-top:48px; }
+
+    /* ────────────────────────────────
+       SLIDE 2 — O CENÁRIO
+    ──────────────────────────────── */
+    #s2 .s2-head { text-align:center; margin-bottom:44px; }
+    #s2 .s2-headline {
+      font-family:var(--fn-d); font-size:clamp(62px,7.5vw,96px);
+      font-weight:700; line-height:1.05; letter-spacing:-.02em; color:var(--text);
+    }
+    #s2 .s2-sub { font-size:clamp(16px,1.6vw,21px); color:var(--muted); margin-top:14px; max-width:540px; margin-left:auto; margin-right:auto; }
+    #s2 .prob-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; width:100%; max-width:1040px; }
+    .prob-card { padding:40px 32px; text-align:center; }
+    .prob-icon { width:62px; height:62px; border-radius:18px; background:rgba(147,51,234,.1); border:1px solid rgba(147,51,234,.2); display:flex; align-items:center; justify-content:center; margin-bottom:22px; color:var(--purple-l); }
+    .prob-title { font-family:var(--fn-d); font-size:26px; font-weight:700; color:var(--text); margin-bottom:12px; }
+    .prob-body { font-size:17px; color:var(--muted); line-height:1.65; }
+    .prob-tag { display:inline-block; margin-top:16px; font-size:14px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(147,51,234,.7); background:rgba(147,51,234,.08); padding:5px 14px; border-radius:100px; }
+    .prob-solution {
+      margin-top:22px; padding:16px 18px 14px;
+      background:linear-gradient(135deg, rgba(147,51,234,.1), rgba(168,85,247,.04));
+      border:1px solid rgba(147,51,234,.22); border-radius:14px;
+      position:relative;
+    }
+    .prob-solution::before {
+      content:''; position:absolute; top:-1px; left:16px; right:16px; height:2px;
+      background:var(--grad); border-radius:2px 2px 0 0;
+    }
+    .prob-solution-lbl {
+      display:block; font-size:10px; font-weight:700; letter-spacing:.28em;
+      text-transform:uppercase; color:var(--purple-l); margin-bottom:6px;
+    }
+    .prob-solution-txt {
+      font-size:14.5px; color:var(--text); font-weight:500; line-height:1.5;
+    }
+
+    /* ────────────────────────────────
+       SLIDE 3 — METODOLOGIA
+    ──────────────────────────────── */
+    #s3 .meth-head { text-align:center; margin-bottom:44px; }
+    #s3 .meth-h { font-family:var(--fn-d); font-size:clamp(62px,7.5vw,94px); font-weight:700; letter-spacing:-.02em; color:var(--text); }
+    #s3 .meth-row { display:flex; align-items:flex-start; width:100%; max-width:1040px; gap:0; }
+    .step-card { flex:1; padding:44px 32px; border-radius:22px; background:var(--card); border:1px solid var(--card-b); transition:all .35s ease; }
+    .step-card:hover { border-color:var(--card-bh); transform:translateY(-6px); box-shadow:0 0 44px rgba(147,51,234,.15); }
+    .step-num { font-family:var(--fn-d); font-size:64px; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:20px; }
+    .step-title { font-family:var(--fn-d); font-size:28px; font-weight:700; color:var(--text); margin-bottom:14px; }
+    .step-body { font-size:17px; color:var(--muted); line-height:1.65; }
+    .step-arrow { flex-shrink:0; display:flex; align-items:center; padding:0 12px; padding-top:68px; color:rgba(147,51,234,.35); font-size:32px; }
+
+    /* "Não é chatbot" highlight */
+    .meth-highlight {
+      margin-top:36px; padding:22px 36px; border-radius:100px;
+      background:linear-gradient(135deg, rgba(147,51,234,.12), rgba(168,85,247,.06));
+      border:1px solid rgba(147,51,234,.3);
+      display:inline-flex; align-items:center; gap:18px;
+      max-width:780px;
+    }
+    .meth-highlight-icon {
+      width:38px; height:38px; border-radius:12px; background:var(--grad);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      color:white;
+    }
+    .meth-highlight-text { text-align:left; font-size:16px; color:var(--text); line-height:1.5; }
+    .meth-highlight-text strong { color:var(--purple-l); font-weight:700; }
+
+    /* Deletado: SLIDE 5 SOLUÇÕES e SLIDE 6 INTEGRAÇÕES */
+
+    /* ────────────────────────────────
+       SLIDE 4 — DASHBOARD + RESULTADOS
+    ──────────────────────────────── */
+    #s4 { text-align:center; }
+    #s4 .res-h { font-family:var(--fn-d); font-size:clamp(56px,6.8vw,86px); font-weight:700; letter-spacing:-.02em; color:var(--text); margin-bottom:14px; }
+    #s4 .res-sub { font-size:18px; color:var(--muted); margin-bottom:36px; max-width:640px; }
+
+    /* Dashboard explanation row — 3 benefit cards */
+    .dash-row {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+      width:100%; max-width:1040px; margin-bottom:32px;
+    }
+    .dash-card {
+      padding:24px 22px; text-align:left;
+      background:var(--card); border:1px solid var(--card-b); border-radius:16px;
+      transition:all .3s ease;
+    }
+    .dash-card:hover { border-color:var(--card-bh); transform:translateY(-3px); }
+    .dash-card-icon {
+      width:40px; height:40px; border-radius:12px; background:rgba(147,51,234,.12);
+      border:1px solid rgba(147,51,234,.25); display:flex; align-items:center; justify-content:center;
+      color:var(--purple-l); margin-bottom:14px;
+    }
+    .dash-card-title { font-family:var(--fn-d); font-size:17px; font-weight:700; color:var(--text); margin-bottom:6px; }
+    .dash-card-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+
+    .dash-divider {
+      width:100%; max-width:1040px; display:flex; align-items:center; gap:14px;
+      margin:8px 0 26px; color:var(--faint);
+    }
+    .dash-divider-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(147,51,234,.3),transparent); }
+    .dash-divider-lbl {
+      font-size:11px; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+      color:var(--purple-l); padding:0 4px;
+    }
+
+    /* Results grid — 4 stat cards, case Terence highlighted */
+    .res-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; width:100%; max-width:1040px; }
+    .res-card { padding:30px 18px; text-align:center; position:relative; overflow:hidden; }
+    .res-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--grad); }
+    .res-num { font-family:var(--fn-d); font-size:clamp(38px,4.8vw,58px); font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:8px; display:block; }
+    .res-lbl { font-size:13px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); }
+    .res-lbl-2 { font-size:13px; color:var(--muted); margin-top:6px; line-height:1.45; }
+    .res-case-tag {
+      display:inline-block; margin-top:10px;
+      font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--purple-l);
+      background:rgba(147,51,234,.1); border:1px solid rgba(147,51,234,.22);
+      padding:3px 10px; border-radius:100px;
+    }
+
+    /* ────────────────────────────────
+       SLIDE 6 — FUNDADORES
+    ──────────────────────────────── */
+    #s6 { text-align:center; justify-content:center; padding-top:0; }
+
+    /* Header block */
+    #s6 .f-header { width:100%; max-width:900px; margin-bottom:10px; }
+    #s6 .f-title {
+      font-family:var(--fn-d);
+      font-size:clamp(52px,6.5vw,80px);
+      font-weight:700; letter-spacing:-.02em;
+      color:var(--text);
+      line-height:1.05; text-align:center; margin-bottom:14px;
+    }
+    #s6 .f-title-line {
+      width:80px; height:3px; margin:0 auto 18px;
+      background:var(--grad); border-radius:4px;
+    }
+    #s6 .f-desc { font-family:var(--fn-b); font-size:18px; color:var(--muted); line-height:1.7; max-width:600px; margin:0 auto 6px; font-weight:300; }
+
+    /* Photos grid */
+    .founders-row {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:28px; max-width:820px; width:100%; margin-top:24px;
+    }
+    .founder-card { display:flex; flex-direction:column; align-items:center; gap:0; text-align:center; }
+
+    /* Photo frame */
+    .founder-photo {
+      width:100%; aspect-ratio:3/4;
+      border-radius:16px; overflow:hidden; flex-shrink:0;
+      position:relative;
+      border:2px solid rgba(147,51,234,.5);
+      box-shadow:
+        0 0 0 1px rgba(147,51,234,.2),
+        0 20px 60px rgba(0,0,0,.7),
+        0 0 40px rgba(147,51,234,.2);
+    }
+    .founder-photo img {
+      width:100%; height:100%;
+      object-fit:cover; object-position:top center;
+      display:block;
+      filter: contrast(1.12) brightness(0.92) saturate(0.75);
+      transition: filter .4s ease;
+    }
+    .founder-card:hover .founder-photo img {
+      filter: contrast(1.05) brightness(1.0) saturate(1.0);
+    }
+    /* Purple gradient overlay on photo */
+    .founder-photo::after {
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(
+        to top,
+        rgba(80,20,140,.75) 0%,
+        rgba(107,33,168,.2) 45%,
+        transparent 70%
+      );
+      border-radius:14px;
+      pointer-events:none;
+    }
+    /* Name/role pinned inside photo bottom */
+    .founder-overlay {
+      position:absolute; bottom:0; left:0; right:0;
+      padding:18px 20px; z-index:2;
+    }
+    .founder-name {
+      font-family:var(--fn-d); font-size:24px; font-weight:800;
+      color:#fff; letter-spacing:-.01em; margin-bottom:6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    }
+    .founder-role {
+      font-size:13px; font-weight:700; letter-spacing:.22em;
+      text-transform:uppercase; color:var(--purple-l);
+    }
+    /* Bio below photo */
+    .founder-bio {
+      font-size:16px; line-height:1.65; color:var(--muted);
+      max-width:340px; margin-top:16px; padding:0 8px;
+    }
+    .founder-initials { display:none; }
+
+    /* ────────────────────────────────
+       SLIDE 7 — CTA
+    ──────────────────────────────── */
+    #s7 { text-align: center; align-items: center; padding-bottom: 80px; /* Compensa a altura do menu e empurra o bloco para o centro visual */}
+    #s7 .cta-h { text-align:center; width:100%; }
+    #s7 .cta-sub { text-align:center; margin-left:auto; margin-right:auto; }
+    #s7 .cta-contact { margin-left:auto; margin-right:auto; }
+    .cta-orb { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; z-index:0; }
+    #s7 > * { position:relative; z-index:1; }
+    .cta-h { font-family:var(--fn-d); font-size:clamp(64px,8.5vw,120px); font-weight:800; line-height:.92; letter-spacing:-.03em; text-transform:uppercase; margin-bottom:24px; color:var(--text); }
+    .cta-sub { font-size:clamp(17px,1.8vw,22px); color:var(--muted); max-width:560px; margin:0 auto 44px; line-height:1.6; }
+    .cta-btn {
+      display:inline-flex; align-items:center; gap:14px;
+      padding:22px 60px; border-radius:100px;
+      background:var(--grad); font-family:var(--fn-d);
+      font-size:17px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+      color:white; cursor:pointer; border:none;
+      box-shadow:0 4px 44px rgba(147,51,234,.65), 0 2px 20px rgba(147,51,234,.35);
+      transition:all .3s ease;
+    }
+    .cta-btn:hover { transform:translateY(-4px); box-shadow:0 8px 64px rgba(147,51,234,.85), 0 4px 30px rgba(147,51,234,.45); }
+    .cta-contact { display: flex; align-items: center; gap: 36px; justify-content: center; margin-top: 36px; /* Deixei um pouco menor para colar mais no botão */padding-bottom: 90px;}
+    .cta-contact-item { text-align:center; }
+    .cta-contact-lbl { font-size:13px; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:var(--faint); margin-bottom:6px; }
+    .cta-contact-val { font-family:var(--fn-d); font-size:19px; font-weight:600; color:var(--muted); }
+    .cta-sep { width:1px; height:32px; background:rgba(147,51,234,.2); }
+
+    /* ────────────────────────────────
+       SLIDE 5 — PROVA SOCIAL
+    ──────────────────────────────── */
+    #s5 { text-align:left; align-items:center; justify-content:center; }
+    #s5 .ps-title-block { text-align:center; width:100%; max-width:1040px; margin-bottom:32px; }
+    #s5 .ps-main-label { font-family:var(--fn-b); font-size:13px; font-weight:700; letter-spacing:.4em; text-transform:uppercase; color:var(--purple-l); margin-bottom:10px; }
+    #s5 .ps-main-h { font-family:var(--fn-d); font-size:clamp(44px,5.5vw,72px); font-weight:800; letter-spacing:-.02em; color:var(--text); line-height:1.05; }
+    #s5 .ps-wrap {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:64px; width:100%; max-width:1040px; align-items:center;
+    }
+    #s5 .ps-logo {
+      font-family:var(--fn-d); font-size:28px; font-weight:800;
+      color:var(--text); margin-bottom:36px; letter-spacing:-.01em;
+    }
+    #s5 .ps-logo span { color:var(--purple-l); }
+    #s5 .ps-section { margin-bottom:28px; }
+    #s5 .ps-section:last-child { margin-bottom:0; }
+    #s5 .ps-section-title {
+      font-family:var(--fn-d); font-size:17px; font-weight:800;
+      letter-spacing:.22em; text-transform:uppercase; color:var(--purple-l);
+      margin-bottom:16px;
+    }
+    #s5 .ps-bullets { list-style:none; display:flex; flex-direction:column; gap:12px; }
+    #s5 .ps-bullets li {
+      font-size:17px; color:var(--muted); line-height:1.65;
+      padding-left:24px; position:relative;
+    }
+    #s5 .ps-bullets li::before {
+      content:'→'; position:absolute; left:0;
+      color:var(--purple-l); font-size:14px; top:1px;
+    }
+    /* Phone mockup */
+    #s5 .ps-right {
+      display:flex; align-items:center; justify-content:center; position:relative;
+    }
+    .ps-phone-glow {
+      position:absolute; width:320px; height:580px; border-radius:50%;
+      background:radial-gradient(ellipse, rgba(147,51,234,.6) 0%, rgba(107,33,168,.3) 40%, transparent 70%);
+      filter:blur(50px); z-index:0; pointer-events:none;
+    }
+    /* Outer phone frame */
+    .ps-phone-frame {
+      position:relative; z-index:1;
+      width:230px;
+      background: linear-gradient(160deg, #2a1a4e, #1a0f30);
+      border-radius:44px;
+      padding:10px;
+      box-shadow:
+        0 0 0 1px rgba(147,51,234,.5),
+        0 0 0 3px rgba(30,15,55,.9),
+        0 0 50px rgba(147,51,234,.35),
+        0 30px 80px rgba(0,0,0,.7);
+    }
+    /* Side buttons */
+    .ps-phone-frame::before {
+      content:'';
+      position:absolute; right:-3px; top:90px;
+      width:3px; height:52px; border-radius:0 3px 3px 0;
+      background:linear-gradient(180deg,#3d2070,#2a1a4e);
+    }
+    .ps-phone-frame::after {
+      content:'';
+      position:absolute; left:-3px; top:80px;
+      width:3px; height:36px; border-radius:3px 0 0 3px;
+      background:linear-gradient(180deg,#3d2070,#2a1a4e);
+      box-shadow: 0 44px 0 #2a1a4e;
+    }
+    /* Screen */
+    .ps-phone-screen {
+      background:#000;
+      border-radius:36px;
+      overflow:hidden;
+      position:relative;
+      aspect-ratio: 9/19.5;
+      width:100%;
+    }
+    /* Dynamic island */
+    .ps-phone-island {
+      position:absolute; top:10px; left:50%; transform:translateX(-50%);
+      width:80px; height:22px; background:#000;
+      border-radius:20px; z-index:10;
+      box-shadow: 0 0 0 2px #111;
+    }
+    .ps-phone-screen video {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background layers -->
+<div id="dot-grid"></div>
+<canvas id="particles"></canvas>
+
+<div class="pres" id="pres">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — CAPA
+  ══════════════════════════════════════════ -->
+  <section class="slide active" id="s1">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+
+    <!-- Logo -->
+    <div class="logo au d0" style="margin-bottom:36px;">
+      <div class="logo-icon" style="background:none;box-shadow:none;padding:0;overflow:hidden;">
+        <img src="src/assets/images/Logo Nexa.png" alt="Nexa AI" style="width:40px;height:40px;object-fit:contain;border-radius:13px;display:block;">
+      </div>
+      <span class="logo-name">Nexa <span class="grad-text">AI</span></span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="hero-h1 au d1">
+      A IA EXECUTA<br>
+      <span class="grad-text-anim">ENQUANTO VOCÊ</span><br>
+      <span class="grad-text-anim">LIDERA.</span>
+    </h1>
+
+    <p class="hero-sub au d2">
+      Automação inteligente para empresas que pensam grande.
+    </p>
+
+    <!-- Stats row -->
+    <div class="hero-footer au d3">
+      <div class="hero-stat">
+        <span class="hero-stat-val grad-text">−60%</span>
+        <span class="hero-stat-lbl">Redução de Custos</span>
+      </div>
+      <div class="hero-stat-sep"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-val grad-text">24/7</span>
+        <span class="hero-stat-lbl">Disponibilidade</span>
+      </div>
+      <div class="hero-stat-sep"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-val grad-text">+25</span>
+        <span class="hero-stat-lbl">Clientes Atendidos</span>
+      </div>
+    </div>
+
+    <p class="hint au d4">· Fundada em Março de 2026 · Brasília, Brasil ·</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — O CENÁRIO
+  ══════════════════════════════════════════ -->
+  <section class="slide" id="s2">
+    <div class="s2-head">
+      <p class="label au d0">O Cenário</p>
+      <h2 class="s2-headline au d1">
+        Três gargalos. <span class="grad-text">Três soluções.</span>
+      </h2>
+      <p class="s2-sub au d2">
+        Toda empresa comercial trava nos mesmos pontos. Mostramos cada problema — e exatamente como a Nexa resolve.
+      </p>
+    </div>
+
+    <div class="prob-grid">
+      <!-- Card 1 -->
+      <div class="prob-card card au d3">
+        <div class="prob-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="2" width="6" height="4" rx="1"/><path d="M17 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            <line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+          </svg>
+        </div>
+        <p class="prob-title">Processos Manuais</p>
+        <p class="prob-body">Tarefas repetitivas que consomem horas da equipe todos os dias — tempo que poderia estar em estratégia e crescimento.</p>
+        <div class="prob-solution">
+          <span class="prob-solution-lbl">Nossa solução</span>
+          <p class="prob-solution-txt">Fluxos autônomos que rodam 24/7, sem intervenção humana.</p>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="prob-card card au d4">
+        <div class="prob-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <p class="prob-title">Times Sobrecarregados</p>
+        <p class="prob-body">Pessoas fazendo o trabalho que máquinas deveriam fazer. Burnout, erros e turnover sobem — a produtividade cai.</p>
+        <div class="prob-solution">
+          <span class="prob-solution-lbl">Nossa solução</span>
+          <p class="prob-solution-txt">IA humanizada que atende, qualifica e converte como seu melhor vendedor.</p>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="prob-card card au d5">
+        <div class="prob-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+        </div>
+        <p class="prob-title">Decisões às Cegas</p>
+        <p class="prob-body">Sem dados em tempo real, cada decisão estratégica é uma aposta. O competidor que opera com IA já saiu na frente.</p>
+        <div class="prob-solution">
+          <span class="prob-solution-lbl">Nossa solução</span>
+          <p class="prob-solution-txt">Dashboard inteligente que mostra cada movimento antes do gargalo aparecer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — METODOLOGIA (ex-slide 4)
+  ══════════════════════════════════════════ -->
+  <section class="slide" id="s3">
+    <div class="meth-head">
+      <p class="label au d0" style="margin-bottom:16px;">Como Solucionamos</p>
+      <h2 class="meth-h au d1">Três passos. <span class="grad-text">Resultados reais.</span></h2>
+      <p class="au d2" style="font-size:15px; color:var(--muted); margin-top:12px; max-width:560px; margin-left:auto; margin-right:auto;">
+        Um processo claro, do diagnóstico à escala. Cada etapa desenhada para gerar resultado mensurável desde o primeiro dia.
+      </p>
+    </div>
+
+    <div class="meth-row">
+      <div class="step-card au d3">
+        <div class="step-num">01</div>
+        <p class="step-title">Diagnóstico</p>
+        <p class="step-body">Mapeamos cada gargalo do seu negócio. Identificamos onde a IA gera maior retorno em menor tempo — com precisão cirúrgica.</p>
+        <div style="margin-top:20px; display:flex; align-items:center; gap:8px;">
+          <div class="live-ring" style="margin-left:2px;"></div>
+          <span style="font-size:11px; font-weight:600; color:var(--purple-l); letter-spacing:.1em; text-transform:uppercase;">Gratuito</span>
+        </div>
+      </div>
+
+      <div class="step-arrow au d4">→</div>
+
+      <div class="step-card au d4">
+        <div class="step-num">02</div>
+        <p class="step-title">Implementação</p>
+        <p class="step-body">Construímos sob medida: fluxos autônomos, agentes de IA humanizada e integrações com as ferramentas que você já usa.</p>
+        <div style="margin-top:20px; display:flex; align-items:center; gap:8px;">
+          <div class="live-ring" style="margin-left:2px;"></div>
+          <span style="font-size:11px; font-weight:600; color:var(--purple-l); letter-spacing:.1em; text-transform:uppercase;">Customizado</span>
+        </div>
+      </div>
+
+      <div class="step-arrow au d5">→</div>
+
+      <div class="step-card au d5">
+        <div class="step-num">03</div>
+        <p class="step-title">Escala</p>
+        <p class="step-body">Acompanhamos de perto, otimizamos continuamente e expandimos as automações conforme seu negócio cresce. Sem teto.</p>
+        <div style="margin-top:20px; display:flex; align-items:center; gap:8px;">
+          <div class="live-ring" style="margin-left:2px;"></div>
+          <span style="font-size:11px; font-weight:600; color:var(--purple-l); letter-spacing:.1em; text-transform:uppercase;">Contínuo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- "Não é chatbot" highlight -->
+    <div class="meth-highlight au d6">
+      <div class="meth-highlight-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 8V4H8"/><rect x="2" y="2" width="20" height="20" rx="2" ry="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+        </svg>
+      </div>
+      <p class="meth-highlight-text">
+        <strong>Não é chatbot.</strong> É IA humanizada que entende contexto, qualifica com intenção e conversa como o seu melhor vendedor — 24 horas por dia.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 4 — DASHBOARD + RESULTADOS (ex-slide 7)
+  ══════════════════════════════════════════ -->
+  <section class="slide" id="s4">
+    <p class="label au d0" style="margin-bottom:14px;">Dashboard &amp; Resultados</p>
+    <h2 class="res-h au d1">Visibilidade total. <span class="grad-text">Resultado real.</span></h2>
+    <p class="res-sub au d2">Cada ação da IA é registrada, medida e exibida em tempo real. Você vê tudo — e os números falam por si.</p>
+
+    <!-- Dashboard benefits: 3 reasons to have it -->
+    <div class="dash-row">
+      <div class="dash-card au d3">
+        <div class="dash-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <p class="dash-card-title">Tempo Real</p>
+        <p class="dash-card-desc">Veja cada atendimento, cada agendamento e cada interação acontecendo ao vivo. Nada escondido.</p>
+      </div>
+
+      <div class="dash-card au d4">
+        <div class="dash-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12h6l3-9 4 18 3-9h4"/>
+          </svg>
+        </div>
+        <p class="dash-card-title">Performance Medida</p>
+        <p class="dash-card-desc">Taxa de sucesso, volume de execuções, conversões agendadas — tudo em métricas claras e objetivas.</p>
+      </div>
+
+      <div class="dash-card au d5">
+        <div class="dash-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </div>
+        <p class="dash-card-title">Decisão com Dados</p>
+        <p class="dash-card-desc">Descubra gargalos antes que virem problema. Ajuste a operação com base em fato — não em achismo.</p>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="dash-divider au d6">
+      <div class="dash-divider-line"></div>
+      <span class="dash-divider-lbl">Case real · Consultório Terence Romano</span>
+      <div class="dash-divider-line"></div>
+    </div>
+
+    <!-- Results grid -->
+    <div class="res-grid">
+      <div class="res-card card-top au d6">
+        <span class="res-num" data-target="1582" data-suffix="">1582</span>
+        <p class="res-lbl">Execuções</p>
+        <p class="res-lbl-2">em um único evento</p>
+        <span class="res-case-tag">Caso Terence</span>
+      </div>
+      <div class="res-card card-top au d7">
+        <span class="res-num">99,94%</span>
+        <p class="res-lbl">Sucesso</p>
+        <p class="res-lbl-2">apenas 1 falha em 1582</p>
+        <span class="res-case-tag">Caso Terence</span>
+      </div>
+      <div class="res-card card-top au d8">
+        <span class="res-num" data-target="8" data-suffix="">8</span>
+        <p class="res-lbl">Reuniões</p>
+        <p class="res-lbl-2">agendadas em 1 semana</p>
+        <span class="res-case-tag">Caso Terence</span>
+      </div>
+      <div class="res-card card-top au d9">
+        <span class="res-num">24/7</span>
+        <p class="res-lbl">Disponibilidade</p>
+        <p class="res-lbl-2">automação sempre ativa</p>
+      </div>
+    </div>
+
+    <p class="au d10" style="font-size:12px; color:var(--faint); margin-top:28px; letter-spacing:.18em; text-transform:uppercase;">
+      Dados reais · Consultório Terence Romano · Morrinhos, GO
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 5 — PROVA SOCIAL (ex-slide 8)
+  ══════════════════════════════════════════ -->
+  <section class="slide" id="s5">
+    <!-- Main title -->
+    <div class="ps-title-block">
+      <p class="ps-main-label au d0">Prova Social</p>
+      <h2 class="ps-main-h au d1">O que nossos <span class="grad-text">clientes dizem.</span></h2>
+    </div>
+
+    <div class="ps-wrap">
+
+      <!-- LEFT: Text content -->
+      <div class="ps-left">
+        <div class="ps-logo au d0">Nexa <span>AI</span></div>
+
+        <div class="ps-section au d1">
+          <p class="ps-section-title">Qualificação Comercial</p>
+          <ul class="ps-bullets">
+            <li>Detecta autoridade, urgência e intenção de compra no lead automaticamente.</li>
+            <li>Aciona o time humano no momento exato em que o lead está quente.</li>
+            <li>Entrega apenas leads prontos para o fechamento, reduzindo o ciclo de venda.</li>
+          </ul>
+        </div>
+
+        <div class="ps-section au d2">
+          <p class="ps-section-title">Transferência Inteligente</p>
+          <ul class="ps-bullets">
+            <li>Passa o contexto completo da conversa para o vendedor humano.</li>
+            <li>Aprende sobre as próximas abordagens com base nas interações do histórico.</li>
+            <li>Garante continuidade natural e conversão previsível.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: Phone mockup with video -->
+      <div class="ps-right au d3">
+        <div class="ps-phone-glow"></div>
+        <div class="ps-phone-frame">
+          <div class="ps-phone-screen">
+            <div class="ps-phone-island"></div>
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              controls
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+              <source src="src/assets/videos/Prova social.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 6 — FUNDADORES (ex-slide 9)
+  ══════════════════════════════════════════ -->
+  <section class="slide" id="s6">
+
+    <!-- Header -->
+    <div class="f-header">
+      <p class="label au d0" style="margin-bottom:16px;">Fundadores</p>
+      <h2 class="f-title au d1">Quem está <span class="grad-text">por trás.</span></h2>
+      <div class="f-title-line au d2"></div>
+      <p class="f-desc au d3">
+        Nos bastidores da Nexa AI estão estrategistas criativos e engenheiros de inteligência artificial.
+        Cada projeto nasce da combinação entre visão de negócio e domínio técnico.
+      </p>
+    </div>
+
+    <!-- Photos -->
+    <div class="founders-row">
+
+      <!-- Pedro Machado -->
+      <div class="founder-card au d4">
+        <div class="founder-photo">
+          <img src="src/assets/images/Pedro Machado.png" alt="Pedro Machado">
+          <div class="founder-overlay">
+            <p class="founder-name">Pedro Machado</p>
+            <p class="founder-role">CEO · Estratégia & Produto</p>
+          </div>
+        </div>
+        <p class="founder-bio">Visionário por trás da Nexa AI. Combina estratégia de negócios com domínio técnico para entregar automações que geram resultado real e escala.</p>
+      </div>
+
+      <!-- Bruno Cesar -->
+      <div class="founder-card au d5">
+        <div class="founder-photo">
+          <img src="src/assets/images/Bruno Cesar.png" alt="Bruno Cesar" style="object-position: center 20%; transform: scale(1.3); transform-origin: center 20%;">
+          <div class="founder-overlay">
+            <p class="founder-name">Bruno Cesar</p>
+            <p class="founder-role">CEO · Inovação & Tecnologia</p>
+          </div>
+        </div>
+        <p class="founder-bio">Mente criadora da Nexa AI. Une arquitetura tecnológica avançada com inovação em IA para construir o futuro da automação de forma elegante e escalável.</p>
+      </div>
+
+    </div>
+
+    <p class="au d6" style="font-size:11px;color:var(--faint);letter-spacing:.18em;text-transform:uppercase;margin-top:18px;">
+      Nossa sede fica localizada em Brasília · Aguas Claras
+    </p>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 7 — CTA (ex-slide 10)
+  ══════════════════════════════════════════ -->
+  <section class="slide" id="s7">
+    <!-- Background orbs -->
+    <div class="cta-orb" style="width:700px;height:700px;background:radial-gradient(ellipse,rgba(147,51,234,.25) 0%,rgba(107,33,168,.12) 40%,transparent 70%);top:-150px;left:50%;transform:translateX(-50%);"></div>
+    <div class="cta-orb" style="width:400px;height:400px;background:radial-gradient(ellipse,rgba(168,85,247,.15) 0%,transparent 70%);bottom:-100px;left:20%;filter:blur(60px);"></div>
+    <div class="cta-orb" style="width:300px;height:300px;background:radial-gradient(ellipse,rgba(124,58,237,.12) 0%,transparent 70%);bottom:-60px;right:15%;filter:blur(50px);"></div>
+
+    <!-- Logo -->
+    <div class="logo au d0" style="margin-bottom:36px;">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <span class="logo-name">Nexa <span class="grad-text">AI</span></span>
+    </div>
+
+    <h2 class="cta-h au d1">
+      Pronto para<br>
+      <span class="grad-text-anim">escalar?</span>
+    </h2>
+
+    <p class="cta-sub au d2">
+      Vamos mapear os gargalos do seu negócio e construir a solução de IA ideal sem enrolação, sem promessas vazias.
+    </p>
+
+    <button class="cta-btn au d3" onclick="void(0)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </svg>
+      DIAGNÓSTICO GRATUITO
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </button>
+
+    <div class="cta-contact au d5">
+      <div class="cta-contact-item">
+        <p class="cta-contact-lbl">Empresa</p>
+        <p class="cta-contact-val">Nexa AI</p>
+      </div>
+      <div class="cta-sep"></div>
+      <div class="cta-contact-item">
+        <p class="cta-contact-lbl">Fundação</p>
+        <p class="cta-contact-val">Março 2026</p>
+      </div>
+      <div class="cta-sep"></div>
+      <div class="cta-contact-item">
+        <p class="cta-contact-lbl">Sede</p>
+        <p class="cta-contact-val">Brasília, Brasil</p>
+      </div>
+      <div class="cta-sep"></div>
+      <div class="cta-contact-item">
+        <p class="cta-contact-lbl">Nicho</p>
+        <p class="cta-contact-val">Automação Comercial</p>
+      </div>
+    </div>
+  </section>
+
+
+
+</div><!-- .pres -->
+
+<!-- Navigation -->
+<div class="nav">
+  <button class="nav-btn" id="btn-prev" onclick="changeSlide(-1)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <span class="nav-count"><b id="cur-num">1</b> / 7</span>
+  <button class="nav-btn" id="btn-next" onclick="changeSlide(1)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<div class="progress" id="progress-bar"></div>
+
+<button class="fs-btn" id="fs-btn" onclick="toggleFS()" title="Tela cheia (F)">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+  </svg>
+</button>
+
+<script>
+  /* ─────────────────────────────────────────────
+     PARTICLE SYSTEM
+  ───────────────────────────────────────────── */
+  (function() {
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function mkParticle() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - .5) * .25,
+        vy: (Math.random() - .5) * .25,
+        r:  Math.random() * 1.8 + .4,
+        o:  Math.random() * .35 + .08,
+        c:  Math.random() > .5 ? [168,85,247] : [147,51,234],
+      };
+    }
+
+    function init() {
+      resize();
+      particles = [];
+      const n = Math.min(Math.floor(W * H / 18000), 90);
+      for (let i = 0; i < n; i++) particles.push(mkParticle());
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(147,51,234,${(1 - dist/130) * .12})`;
+            ctx.lineWidth = .8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (const p of particles) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.o})`;
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { init(); });
+    init();
+    draw();
+  })();
+
+  /* ─────────────────────────────────────────────
+     SLIDE NAVIGATION
+  ───────────────────────────────────────────── */
+  const TOTAL  = 7;
+  let current  = 1;
+  let animating = false;
+
+  const slides = () => document.querySelectorAll('.slide');
+  const getSlide = (n) => document.getElementById('s' + n);
+
+  function updateUI() {
+    document.getElementById('cur-num').textContent = current;
+    const pct = ((current - 1) / (TOTAL - 1)) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }
+
+  function resetAnimations(slideEl) {
+    // Force re-trigger CSS animations
+    const els = slideEl.querySelectorAll('.au,.al,.ar,.as');
+    els.forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = '';
+    });
+  }
+
+  function goTo(n) {
+    if (animating || n === current || n < 1 || n > TOTAL) return;
+    animating = true;
+
+    const from = getSlide(current);
+    const to   = getSlide(n);
+
+    from.classList.add('leaving');
+    from.classList.remove('active');
+
+    resetAnimations(to);
+    to.classList.add('active');
+
+    current = n;
+    updateUI();
+
+    setTimeout(() => {
+      from.classList.remove('leaving');
+      animating = false;
+    }, 620);
+
+    // Trigger counter on results slide
+    if (n === 4) setTimeout(runCounters, 400);
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault(); changeSlide(1);
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+      e.preventDefault(); changeSlide(-1);
+    }
+    if (e.key === 'Home') goTo(1);
+    if (e.key === 'End')  goTo(TOTAL);
+    if (e.key === 'f' || e.key === 'F') toggleFS();
+  });
+
+  // Touch / swipe
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const dx = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) changeSlide(dx > 0 ? 1 : -1);
+  });
+
+  // Fullscreen
+  function toggleFS() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen && document.exitFullscreen();
+    }
+  }
+
+  /* ─────────────────────────────────────────────
+     ANIMATED COUNTERS (slide 4 — Dashboard + Resultados)
+  ───────────────────────────────────────────── */
+  function runCounters() {
+    document.querySelectorAll('[data-target]').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      let start = 0;
+      const duration = 1400;
+      const startTime = performance.now();
+
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+        const val = Math.round(ease * target);
+        el.textContent = val + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // Init
+  updateUI();
+</script>
+
+</body>
+</html>
